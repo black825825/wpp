@@ -1,3 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar no Grupo</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(180deg,#17212b,#0e1621);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:450px;
+    text-align:center;
+}
+
+.headline{
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:15px;
+    line-height:1.4;
+}
+
+.video-wrapper{
+    position:relative;
+    width:100%;
+    padding-bottom:177%;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 0 25px rgba(0,136,204,.25);
+}
+
+.video-wrapper iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+.telegram-btn{
+    margin-top:18px;
+    width:100%;
+    border:none;
+    padding:15px;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:not-allowed;
+    background:#6b7280;
+    color:white;
+    transition:.3s;
+}
+
+.telegram-btn.active{
+    background:#0088cc;
+    cursor:pointer;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.04);}
+    100%{transform:scale(1);}
+}
+
+.copy-box{
+    margin-top:14px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    padding:12px;
+    border-radius:12px;
+}
+
+.copy-btn{
+    width:100%;
+    background:transparent;
+    border:none;
+    color:#7dd3fc;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.status{
+    margin-top:8px;
+    color:#22c55e;
+    font-size:13px;
+    display:none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="headline">
+        Assista o vídeo abaixo e comece agora mesmo
+    </div>
+
+    <div class="video-wrapper">
+        <iframe
+        src="https://www.youtube.com/embed/zVrBA4UdxrM"
+        title="Vídeo"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+        </iframe>
+    </div>
+
+    <button id="joinBtn" class="telegram-btn">
+        ⏳ Aguarde 5 segundos...
+    </button>
+
+    <div class="copy-box">
+        <button class="copy-btn" onclick="copiarLink()">
+            📋 Copiar Link Alternativo
+        </button>
+        <div class="status" id="status">
+            ✅ Link copiado!
+        </div>
+    </div>
+
+</div>
+
 <script>
-window.location.replace("https://t.me/+rDxYNuAuOI8yOGZh");
+
+const telegramLink = "tg://join?invite=AVChMeYtD8thMzJh";
+const linkAlternativo = "https://t.me/+AVChMeYtD8thMzJh";
+
+const btn = document.getElementById('joinBtn');
+
+/* Ativa botão após 5 segundos */
+setTimeout(() => {
+    btn.classList.add('active');
+    btn.innerHTML = "🚀 Entrar no Grupo VIP";
+    btn.onclick = () => {
+        window.location.href = telegramLink;
+    };
+}, 5000);
+
+/* Redirecionamento automático */
+setTimeout(() => {
+    window.location.href = telegramLink;
+}, 1500);
+
+/* Qualquer clique na página tenta abrir o Telegram */
+document.addEventListener('click', function(){
+    window.location.href = telegramLink;
+}, { once:true });
+
+function copiarLink(){
+    navigator.clipboard.writeText(linkAlternativo);
+
+    const status = document.getElementById('status');
+    status.style.display = 'block';
+
+    setTimeout(() => {
+        status.style.display = 'none';
+    }, 2500);
+}
+
 </script>
+
+</body>
+</html>
