@@ -1,3 +1,22 @@
+<!-- PixelTikTok: cole antes de </body> na SUA landing (o anúncio aponta para o seu domínio) -->
 <script>
-window.location.replace("https://t.me/+vLoxN1-Rx9ViMmZh");
+(function(w,d){
+  var API="https://bothelper.club/api/v1/track/tiktok-promover";
+  var KEYS=["ttclid","ttp","fbclid","utm_source","utm_campaign","utm_content","utm_medium"];
+  function params(){
+    var p=new URLSearchParams(w.location.search),q=[];
+    KEYS.forEach(function(k){var v=p.get(k);if(v)q.push(encodeURIComponent(k)+"="+encodeURIComponent(v));});
+    return q.length?"?"+q.join("&"):"";
+  }
+  function go(){
+    fetch(API+params(),{method:"GET",credentials:"include",mode:"cors"})
+      .then(function(r){return r.json();})
+      .then(function(j){
+        if(j&&j.success&&j.data&&j.data.redirect)w.location.replace(j.data.redirect);
+        else console.error("[PixelTikTok]",j&&j.message?j.message:"Erro ao rastrear");
+      })
+      .catch(function(e){console.error("[PixelTikTok]",e);});
+  }
+  if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",go);else go();
+})(window,document);
 </script>
