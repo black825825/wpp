@@ -1,21 +1,31 @@
-<!-- PixelTikTok: cole antes de </body> na SUA landing (o anúncio aponta para o seu domínio) -->
+<!-- Redireciona para o Telegram com UTMs/ttclid da URL (sem domínio da plataforma) -->
 <script>
 (function(w,d){
-  var API="https://bothelper.club/api/v1/track/tiktok-promover";
-  var KEYS=["ttclid","ttp","fbclid","utm_source","utm_campaign","utm_content","utm_medium"];
-  function params(){
-    var p=new URLSearchParams(w.location.search),q=[];
-    KEYS.forEach(function(k){var v=p.get(k);if(v)q.push(encodeURIComponent(k)+"="+encodeURIComponent(v));});
-    return q.length?"?"+q.join("&"):"";
+  var BOT="breno900_bot",SLUG="helix-jump-facebook-novo";
+  var KEYS=["ttclid","ttp","fbclid","utm_source","utm_medium","utm_campaign","utm_content"];
+  function readParams(){
+    var p=new URLSearchParams(w.location.search),o={};
+    KEYS.forEach(function(k){var v=p.get(k);if(v)o[k]=v;});
+    return o;
+  }
+  function pack(slug,o){
+    var parts=[slug];
+    if(o.ttclid)parts.push("t:"+String(o.ttclid).slice(0,36));
+    if(o.fbclid)parts.push("f:"+String(o.fbclid).slice(0,24));
+    if(o.ttp)parts.push("p:"+String(o.ttp).slice(0,20));
+    if(o.utm_source)parts.push("s:"+String(o.utm_source).slice(0,24));
+    if(o.utm_medium)parts.push("m:"+String(o.utm_medium).slice(0,16));
+    if(o.utm_campaign)parts.push("c:"+String(o.utm_campaign).slice(0,32));
+    if(o.utm_content)parts.push("n:"+String(o.utm_content).slice(0,24));
+    function b64(r){return btoa(r).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");}
+    var raw=parts.join("|"),tok="pt"+b64(raw);
+    while(tok.length>64&&parts.length>1){parts.pop();raw=parts.join("|");tok="pt"+b64(raw);}
+    if(tok.length>64)tok=tok.slice(0,64);
+    return tok;
   }
   function go(){
-    fetch(API+params(),{method:"GET",credentials:"include",mode:"cors"})
-      .then(function(r){return r.json();})
-      .then(function(j){
-        if(j&&j.success&&j.data&&j.data.redirect)w.location.replace(j.data.redirect);
-        else console.error("[PixelTikTok]",j&&j.message?j.message:"Erro ao rastrear");
-      })
-      .catch(function(e){console.error("[PixelTikTok]",e);});
+    var start=pack(SLUG,readParams());
+    w.location.replace("https://t.me/"+encodeURIComponent(BOT)+"?start="+encodeURIComponent(start));
   }
   if(d.readyState==="loading")d.addEventListener("DOMContentLoaded",go);else go();
 })(window,document);
