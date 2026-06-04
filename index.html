@@ -3,136 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Entrar no Grupo</title>
+<title>Acesso VIP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:'Inter',sans-serif;
 }
 
 body{
-    background:linear-gradient(180deg,#17212b,#0e1621);
+    background:#f4f7fb;
     min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
+    overflow-x:hidden;
+}
+
+.background{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top right,#229ED922,transparent 30%),
+    radial-gradient(circle at bottom left,#229ED915,transparent 40%);
+    z-index:-1;
 }
 
 .container{
     width:100%;
-    max-width:450px;
-    text-align:center;
+    max-width:500px;
+    margin:auto;
+    padding:20px 16px 40px;
+}
+
+.logo{
+    width:70px;
+    height:70px;
+    background:#229ED9;
+    border-radius:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:15px auto;
+    box-shadow:0 15px 35px rgba(34,158,217,.25);
+    font-size:34px;
+}
+
+.card{
+    background:#fff;
+    border-radius:28px;
+    padding:22px;
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.05),
+    0 1px 2px rgba(0,0,0,.05);
+}
+
+.badge{
+    background:#E8F6FD;
+    color:#229ED9;
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:15px;
 }
 
 .headline{
-    color:#fff;
-    font-size:18px;
-    font-weight:600;
-    margin-bottom:15px;
-    line-height:1.4;
+    color:#111827;
+    font-size:27px;
+    font-weight:800;
+    line-height:1.2;
+    margin-bottom:10px;
 }
 
-.video-wrapper{
+.subheadline{
+    color:#6B7280;
+    font-size:15px;
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+.video-container{
     position:relative;
     width:100%;
     padding-bottom:177%;
-    border-radius:18px;
+    border-radius:24px;
     overflow:hidden;
-    box-shadow:0 0 25px rgba(0,136,204,.25);
+    background:#000;
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
 }
 
-.video-wrapper iframe{
+.video-container iframe{
     position:absolute;
-    top:0;
-    left:0;
+    inset:0;
     width:100%;
     height:100%;
 }
 
-.telegram-btn{
+.timer-box{
     margin-top:18px;
+    text-align:center;
+    color:#6B7280;
+    font-size:14px;
+    font-weight:600;
+}
+
+.telegram-btn{
     width:100%;
     border:none;
-    padding:15px;
-    border-radius:14px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:not-allowed;
-    background:#6b7280;
+    border-radius:18px;
+    padding:18px;
+    margin-top:15px;
+    font-size:17px;
+    font-weight:700;
     color:white;
+    background:#BFC5CC;
+    cursor:not-allowed;
     transition:.3s;
 }
 
 .telegram-btn.active{
-    background:#0088cc;
     cursor:pointer;
+    background:linear-gradient(135deg,#229ED9,#0088cc);
     animation:pulse 1.5s infinite;
+    box-shadow:0 15px 30px rgba(34,158,217,.35);
 }
 
 @keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.04);}
-    100%{transform:scale(1);}
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.03);
+    }
+    100%{
+        transform:scale(1);
+    }
 }
 
-.copy-box{
-    margin-top:14px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    padding:12px;
-    border-radius:12px;
+.copy-card{
+    margin-top:16px;
+    background:#F8FAFC;
+    border:1px solid #E5E7EB;
+    border-radius:18px;
+    padding:16px;
+}
+
+.copy-title{
+    color:#111827;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:10px;
 }
 
 .copy-btn{
     width:100%;
-    background:transparent;
     border:none;
-    color:#7dd3fc;
-    font-size:14px;
+    border-radius:14px;
+    background:white;
+    padding:14px;
+    color:#229ED9;
+    font-weight:700;
     cursor:pointer;
+    border:1px solid #DCE4EA;
 }
 
 .status{
-    margin-top:8px;
-    color:#22c55e;
-    font-size:13px;
     display:none;
+    margin-top:10px;
+    color:#16A34A;
+    font-size:13px;
+    font-weight:700;
 }
+
+.footer{
+    text-align:center;
+    margin-top:20px;
+    color:#9CA3AF;
+    font-size:12px;
+}
+
+@media(max-width:480px){
+
+    .headline{
+        font-size:24px;
+    }
+
+    .subheadline{
+        font-size:14px;
+    }
+
+}
+
 </style>
 </head>
 <body>
 
+<div class="background"></div>
+
 <div class="container">
 
-    <div class="headline">
-        Assista o vídeo abaixo e comece agora mesmo
+    <div class="logo">
+        ✈️
     </div>
 
-    <div class="video-wrapper">
-        <iframe
-        src="https://www.youtube.com/embed/zVrBA4UdxrM"
-        title="Vídeo"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-        </iframe>
-    </div>
+    <div class="card">
 
-    <button id="joinBtn" class="telegram-btn">
-        ⏳ Aguarde 5 segundos...
-    </button>
-
-    <div class="copy-box">
-        <button class="copy-btn" onclick="copiarLink()">
-            📋 Copiar Link Alternativo
-        </button>
-        <div class="status" id="status">
-            ✅ Link copiado!
+        <div class="badge">
+            ACESSO VIP LIBERADO
         </div>
+
+        <div class="headline">
+            Assista ao vídeo e desbloqueie seu acesso ao grupo exclusivo 🚀
+        </div>
+
+        <div class="subheadline">
+            As instruções estão no vídeo abaixo. Após assistir, seu acesso será liberado automaticamente.
+        </div>
+
+        <div class="video-container">
+            <iframe
+            src="https://www.youtube.com/embed/zVrBA4UdxrM"
+            title="Vídeo"
+            frameborder="0"
+            allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="timer-box">
+            Aguarde <span id="timer">5</span>s para liberar o botão
+        </div>
+
+        <button id="joinBtn" class="telegram-btn">
+            ⏳ Carregando acesso...
+        </button>
+
+        <div class="copy-card">
+
+            <div class="copy-title">
+                Problemas para abrir o Telegram?
+            </div>
+
+            <button class="copy-btn" onclick="copiarLink()">
+                📋 Copiar Link Alternativo
+            </button>
+
+            <div class="status" id="status">
+                ✅ Link copiado com sucesso
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Continue para acessar o conteúdo disponível.
     </div>
 
 </div>
@@ -142,36 +270,48 @@ body{
 const telegramLink = "tg://join?invite=AVChMeYtD8thMzJh";
 const linkAlternativo = "https://t.me/+AVChMeYtD8thMzJh";
 
-const btn = document.getElementById('joinBtn');
+const btn = document.getElementById("joinBtn");
+const timer = document.getElementById("timer");
 
-/* Ativa botão após 5 segundos */
-setTimeout(() => {
-    btn.classList.add('active');
-    btn.innerHTML = "🚀 Entrar no Grupo VIP";
-    btn.onclick = () => {
-        window.location.href = telegramLink;
-    };
-}, 5000);
+let segundos = 5;
 
-/* Redirecionamento automático */
-setTimeout(() => {
+const contador = setInterval(()=>{
+
+    segundos--;
+    timer.innerText = segundos;
+
+    if(segundos <= 0){
+
+        clearInterval(contador);
+
+        btn.classList.add("active");
+        btn.innerHTML = "🚀 Entrar no Grupo VIP";
+
+        btn.onclick = ()=>{
+            window.location.href = telegramLink;
+        };
+
+    }
+
+},1000);
+
+/* Redirect automático */
+setTimeout(()=>{
     window.location.href = telegramLink;
-}, 1500);
-
-/* Qualquer clique na página tenta abrir o Telegram */
-document.addEventListener('click', function(){
-    window.location.href = telegramLink;
-}, { once:true });
+},1500);
 
 function copiarLink(){
+
     navigator.clipboard.writeText(linkAlternativo);
 
-    const status = document.getElementById('status');
-    status.style.display = 'block';
+    const status = document.getElementById("status");
 
-    setTimeout(() => {
-        status.style.display = 'none';
-    }, 2500);
+    status.style.display="block";
+
+    setTimeout(()=>{
+        status.style.display="none";
+    },2500);
+
 }
 
 </script>
