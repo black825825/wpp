@@ -378,25 +378,42 @@
 </div>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+
     const btn = document.getElementById("btn-whatsapp");
 
     if (!btn) return;
 
-    btn.addEventListener("click", function (e) {
+    btn.addEventListener("click", function(e){
+
         e.preventDefault();
 
         const destino = this.href;
 
-        // Dispara o evento Lead do Meta Pixel
-        if (typeof fbq === "function") {
-            fbq("track", "Lead");
+        let abriu = false;
+
+        function abrirDestino(){
+            if(abriu) return;
+            abriu = true;
+            window.open(destino, "_blank");
         }
 
-        // Aguarda o envio do evento e depois abre o destino
-        setTimeout(function () {
-            window.open(destino, "_blank");
-        }, 300);
+        if(typeof fbq === "function"){
+
+            fbq("track", "Lead", {}, {
+                eventID: "lead_" + Date.now(),
+                event_callback: abrirDestino
+            });
+
+            setTimeout(abrirDestino, 1500);
+
+        }else{
+
+            abrirDestino();
+
+        }
+
     });
+
 });
 </script>
  <!-- Meta Pixel Code -->
